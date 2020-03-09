@@ -1,0 +1,29 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: cloud-admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:8088
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+  security:
+    user:
+      name: admin
+      password: admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    health:
+      show-details: always

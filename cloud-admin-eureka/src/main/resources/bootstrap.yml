@@ -1,0 +1,41 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8088
+        username: admin
+        password: admin
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+  security:
+    user:
+      name: admin
+      password: admin
+  application:
+    name: eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    health:
+      show-details: always      
+      
+
+  
